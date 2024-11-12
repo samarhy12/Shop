@@ -1,0 +1,122 @@
+{% extends "base.html" %} {% block title %}Products - Store{% endblock %} {%
+block content %}
+<div class="flex flex-col lg:flex-row gap-8">
+  <!-- Filters Sidebar -->
+  <div class="lg:w-1/4">
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-4">Filters</h2>
+
+      <!-- Categories -->
+      <div class="mb-6">
+        <h3 class="font-medium mb-3">Categories</h3>
+        <div class="space-y-2">
+          {% for category in categories %}
+          <label class="flex items-center">
+            <input
+              type="checkbox"
+              class="rounded border-gray-300 text-primary focus:ring-primary"
+              value="{{ category.id }}"
+            />
+            <span class="ml-2">{{ category.name }}</span>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Price Range -->
+      <div class="mb-6">
+        <h3 class="font-medium mb-3">Price Range</h3>
+        <div class="space-y-4">
+          <input type="range" class="w-full" min="0" max="1000" step="10" />
+          <div class="flex justify-between">
+            <input
+              type="number"
+              class="w-20 px-2 py-1 border rounded"
+              placeholder="Min"
+            />
+            <input
+              type="number"
+              class="w-20 px-2 py-1 border rounded"
+              placeholder="Max"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Sorting -->
+      <div>
+        <h3 class="font-medium mb-3">Sort By</h3>
+        <select class="w-full border rounded-lg p-2">
+          <option>Newest First</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Most Popular</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="lg:w-3/4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for product in products %}
+      <div
+        class="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition"
+      >
+        <a href="{{ url_for('product_detail', slug=product.slug) }}">
+          <img
+            src="{{ product.primary_image }}"
+            alt="{{ product.name }}"
+            class="w-full h-64 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-medium text-gray-900">{{ product.name }}</h3>
+            <div class="mt-2 flex justify-between items-center">
+              <div>
+                {% if product.sale_price %}
+                <span class="text-accent font-bold"
+                  >${{ product.sale_price }}</span
+                >
+                <span class="text-gray-500 line-through text-sm ml-2"
+                  >${{ product.price }}</span
+                >
+                {% else %}
+                <span class="text-gray-900 font-bold"
+                  >${{ product.price }}</span
+                >
+                {% endif %}
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-star text-yellow-400"></i>
+                <span class="ml-1 text-sm text-gray-600"
+                  >{{ product.rating }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-8 flex justify-center">
+      <nav class="flex items-center space-x-2">
+        <a href="#" class="px-3 py-1 rounded-lg border hover:bg-gray-50"
+          >Previous</a
+        >
+        <a href="#" class="px-3 py-1 rounded-lg border bg-primary text-white"
+          >1</a
+        >
+        <a href="#" class="px-3 py-1 rounded-lg border hover:bg-gray-50">2</a>
+        <a href="#" class="px-3 py-1 rounded-lg border hover:bg-gray-50">3</a>
+        <span class="px-3 py-1">...</span>
+        <a href="#" class="px-3 py-1 rounded-lg border hover:bg-gray-50">10</a>
+        <a href="#" class="px-3 py-1 rounded-lg border hover:bg-gray-50"
+          >Next</a
+        >
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

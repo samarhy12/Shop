@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}E-commerce Store{% endblock %}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Animation Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* Custom Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.5s ease-out;
+      }
+
+      /* Custom Styles */
+      .nav-link {
+        @apply relative;
+      }
+
+      .nav-link::after {
+        @apply content-[''] absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300;
+      }
+
+      .nav-link:hover::after {
+        @apply w-full;
+      }
+
+      .mega-menu {
+        transform: translateY(20px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .mega-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3b82f6",
+              secondary: "#64748b",
+              accent: "#f59e0b",
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-out",
+              "slide-in": "slideIn 0.5s ease-out",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="h-full flex flex-col bg-gray-50">
+    <!-- Top Bar -->
+    <div class="bg-primary text-white text-sm py-2">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+          <a href="tel:+1234567890" class="hover:text-gray-200 transition">
+            <i class="fas fa-phone mr-2"></i>+1 (234) 567-890
+          </a>
+          <a
+            href="mailto:support@store.com"
+            class="hover:text-gray-200 transition"
+          >
+            <i class="fas fa-envelope mr-2"></i>support@store.com
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="#" class="hover:text-gray-200 transition">Track Order</a>
+          <a href="#" class="hover:text-gray-200 transition">Store Locator</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-20">
+          <!-- Logo -->
+          <a href="/" class="flex items-center space-x-2">
+            <i class="fas fa-store text-primary text-3xl"></i>
+            <span class="text-2xl font-bold text-gray-800">Store</span>
+          </a>
+
+          <!-- Search -->
+          <div class="hidden md:flex flex-1 max-w-2xl mx-8">
+            <div class="relative w-full">
+              <input
+                type="search"
+                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                placeholder="Search for products..."
+              />
+              <button
+                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center space-x-6">
+            <a href="#" class="relative hover:text-primary transition">
+              <i class="fas fa-heart text-xl"></i>
+              <span
+                class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"
+                >0</span
+              >
+            </a>
+            <a href="#" class="relative hover:text-primary transition">
+              <i class="fas fa-shopping-cart text-xl"></i>
+              <span
+                class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"
+                >0</span
+              >
+            </a>
+            <a href="#" class="hover:text-primary transition">
+              <i class="fas fa-user text-xl"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="border-t">
+          <ul class="flex items-center space-x-8 h-12">
+            <li>
+              <a
+                href="#"
+                class="nav-link text-gray-600 hover:text-primary transition"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="nav-link text-gray-600 hover:text-primary transition"
+                >Categories</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="nav-link text-gray-600 hover:text-primary transition"
+                >New Arrivals</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="nav-link text-gray-600 hover:text-primary transition"
+                >Deals</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="nav-link text-gray-600 hover:text-primary transition"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="nav-link text-gray-600 hover:text-primary transition"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 container mx-auto px-4 py-8">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <!-- Company Info -->
+          <div class="animate-on-scroll">
+            <h3 class="text-white text-lg font-semibold mb-4">About Store</h3>
+            <p class="mb-4">
+              Your one-stop destination for all your shopping needs. Quality
+              products, competitive prices, and excellent customer service.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="hover:text-primary transition"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="hover:text-primary transition"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="hover:text-primary transition"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="hover:text-primary transition"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="animate-on-scroll">
+            <h3 class="text-white text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="hover:text-primary transition">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition">Contact Us</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition"
+                  >Terms & Conditions</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition">FAQs</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Account -->
+          <div class="animate-on-scroll">
+            <h3 class="text-white text-lg font-semibold mb-4">Account</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="hover:text-primary transition">My Account</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition"
+                  >Order History</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition">Wishlist</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition">Newsletter</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition">Returns</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="animate-on-scroll">
+            <h3 class="text-white text-lg font-semibold mb-4">Newsletter</h3>
+            <p class="mb-4">
+              Subscribe to receive updates, access to exclusive deals, and more.
+            </p>
+            <form class="flex">
+              <input
+                type="email"
+                class="flex-1 px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                placeholder="Enter your email"
+              />
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-r-lg hover:bg-primary-dark transition"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="border-t border-gray-800 pt-8 mt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2024 Store. All rights reserved.</p>
+            <div class="flex items-center space-x-4 mt-4 md:mt-0">
+              <img src="/api/placeholder/40/25" alt="Visa" class="h-6" />
+              <img src="/api/placeholder/40/25" alt="Mastercard" class="h-6" />
+              <img src="/api/placeholder/40/25" alt="PayPal" class="h-6" />
+              <img
+                src="/api/placeholder/40/25"
+                alt="American Express"
+                class="h-6"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Intersection Observer for scroll animations
+      const animateOnScroll = () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("fade-in-up");
+            }
+          });
+        });
+
+        document.querySelectorAll(".animate-on-scroll").forEach((element) => {
+          observer.observe(element);
+        });
+      };
+
+      // Initialize animations
+      document.addEventListener("DOMContentLoaded", () => {
+        animateOnScroll();
+      });
+    </script>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
